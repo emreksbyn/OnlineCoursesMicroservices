@@ -1,0 +1,13 @@
+﻿First -> Open the cmd and run : dotnet new -i identityserver4.templates
+
+Select -> N
+
+Open the cmd in IdentityServer filePath and run : dotnet new is4aspid
+
+Give the Connection String to appsettings.json .
+
+Delete the Migration.
+
+Download to SqlServer from Nuget.
+
+Change the UseSqlite -> UseSqlServer
