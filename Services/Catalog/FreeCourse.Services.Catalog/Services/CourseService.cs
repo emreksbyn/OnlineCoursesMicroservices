@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using FreeCourse.Services.Catalog.Dtos.Category;
 using FreeCourse.Services.Catalog.Dtos.Course;
 using FreeCourse.Services.Catalog.Models;
 using FreeCourse.Services.Catalog.Settings;
-using FreeCourse.Shared.Dtos;
+using Shared.FreeCourse.Shared.Dtos;
 using MongoDB.Driver;
 
 namespace FreeCourse.Services.Catalog.Services

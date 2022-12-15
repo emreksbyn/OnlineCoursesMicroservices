@@ -1,5 +1,5 @@
 ﻿using FreeCourse.Services.Catalog.Dtos.Category;
-using FreeCourse.Shared.Dtos;
+using Shared.FreeCourse.Shared.Dtos;
 
 namespace FreeCourse.Services.Catalog.Services
 {

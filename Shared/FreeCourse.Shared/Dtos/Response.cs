@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FreeCourse.Shared.Dtos
+namespace Shared.FreeCourse.Shared.Dtos
 {
     public class Response<T>
     {
