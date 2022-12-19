@@ -1,2 +1,5 @@
+- FreeCource.IdentityServer => 5001
+
 - Services
 	-> FreeCource.Services.Catalog => 5011
+	-> FreeCource.Services.PhotoStock => 5012
