@@ -24,7 +24,7 @@ namespace FreeCourse.Services.Basket.Controllers
         public async Task<IActionResult> GetBasket()
         {
             //var claims = HttpContext.User.Claims;
-            IEnumerable<Claim> claims = User.Claims;
+            //IEnumerable<Claim> claims = User.Claims;
             string userId = _identityService.GetUserId;
             Response<BasketDto> basketDto = await _basketService.GetBasket(userId);
             return CreateActionResultInstance(basketDto);
