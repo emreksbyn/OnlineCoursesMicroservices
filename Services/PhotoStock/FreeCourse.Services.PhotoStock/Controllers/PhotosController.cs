@@ -12,7 +12,7 @@ namespace FreeCourse.Services.PhotoStock.Controllers
         [HttpPost]
         public async Task<IActionResult> PhotoSave(IFormFile photo, CancellationToken cancellationToken)
         {
-            if (photo == null && photo.Length > 0)
+            if (photo != null && photo.Length > 0)
             {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", photo.FileName);
 
