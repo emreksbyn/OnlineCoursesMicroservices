@@ -3,3 +3,4 @@
 - Services
 	-> FreeCource.Services.Catalog => 5011
 	-> FreeCource.Services.PhotoStock => 5012
+	-> FreeCource.Services.Basket => 5013
