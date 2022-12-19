@@ -109,7 +109,6 @@ namespace FreeCourse.IdentityServer
                     {
                         "catalog_fullpermission",
                         "photo_stock_fullpermission",
-                        "basket_fullpermission",
                         IdentityServerConstants.LocalApi.ScopeName
                     }
                 },
@@ -126,12 +125,13 @@ namespace FreeCourse.IdentityServer
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowedScopes =
                     {
+                        "basket_fullpermission",
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OfflineAccess,
                         IdentityServerConstants.LocalApi.ScopeName,
-                        "roles",
+                        "roles"
                     },
                     AccessTokenLifetime = 1*60*60,
                     RefreshTokenExpiration = TokenExpiration.Absolute,

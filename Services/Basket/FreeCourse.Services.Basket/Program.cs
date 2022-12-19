@@ -2,14 +2,17 @@ using FreeCourse.Services.Basket.Services;
 using FreeCourse.Services.Basket.Settings;
 using FreeCourse.Shared.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
+AuthorizationPolicy requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 builder.Services.AddControllers(opt =>
 {
-    opt.Filters.Add(new AuthorizeFilter());
+    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
 });
 
 builder.Services.AddHttpContextAccessor();
@@ -29,6 +32,9 @@ builder.Services.AddSingleton<RedisService>(sp =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier => sub -- (do not change this, keep it as "sub")
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {

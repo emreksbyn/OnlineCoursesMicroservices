@@ -4,6 +4,7 @@ using FreeCourse.Shared.Services;
 using Microsoft.AspNetCore.Mvc;
 using Shared.FreeCourse.Shared.ControllerBases;
 using Shared.FreeCourse.Shared.Dtos;
+using System.Security.Claims;
 
 namespace FreeCourse.Services.Basket.Controllers
 {
@@ -22,6 +23,8 @@ namespace FreeCourse.Services.Basket.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBasket()
         {
+            //var claims = HttpContext.User.Claims;
+            IEnumerable<Claim> claims = User.Claims;
             string userId = _identityService.GetUserId;
             Response<BasketDto> basketDto = await _basketService.GetBasket(userId);
             return CreateActionResultInstance(basketDto);
