@@ -27,7 +27,7 @@ namespace FreeCourse.Services.Discount.Services
         public async Task<Response<Models.Discount>> GetById(int id)
         {
             IEnumerable<Models.Discount> discounts = await _dbConnection.QueryAsync<Models.Discount>(
-                "SELECT * FROM Discount WHERE id@Id",
+                "SELECT * FROM Discount WHERE Id=@Id",
                 new
                 {
                     Id = id
@@ -42,7 +42,7 @@ namespace FreeCourse.Services.Discount.Services
         public async Task<Response<Models.Discount>> GetByCodeAndUserId(string code, string userId)
         {
             IEnumerable<Models.Discount> discounts = await _dbConnection.QueryAsync<Models.Discount>(
-                 "SELECT * FROM Discount WHERE userid=@UserId AND code=@Code",
+                 "SELECT * FROM Discount WHERE UserId=@UserId AND Code=@Code",
                  new
                  {
                      Code = code,
@@ -57,7 +57,7 @@ namespace FreeCourse.Services.Discount.Services
         public async Task<Response<NoContent>> Save(Models.Discount discount)
         {
             int saveStatus = await _dbConnection.ExecuteAsync(
-                "INSERT INTO Discount (userid, rate, code) VALUES (@UserId, @Rate, @Code)",
+                "INSERT INTO Discount (UserId, Rate, Code) VALUES (@UserId, @Rate, @Code)",
                 discount
                 );
             if (saveStatus > 0) return Response<NoContent>.Success(204);
@@ -67,7 +67,7 @@ namespace FreeCourse.Services.Discount.Services
         public async Task<Response<NoContent>> Update(Models.Discount discount)
         {
             int updateStatus = await _dbConnection.ExecuteAsync(
-                "UPDATE Discount SET userid=@UserId, code=@Code, rate=@Rate WHERE id=@Id",
+                "UPDATE Discount SET UserId=@UserId, Code=@Code, Rate=@Rate WHERE Id=@Id",
                 new
                 {
                     Id = discount.Id,
@@ -83,7 +83,7 @@ namespace FreeCourse.Services.Discount.Services
         public async Task<Response<NoContent>> Delete(int id)
         {
             int deleteStatus = await _dbConnection.ExecuteAsync(
-                "DELETE FROM Discount WHERE id=@Id",
+                "DELETE FROM Discount WHERE Id=@Id",
                 new { Id = id });
             return deleteStatus > 0 ? Response<NoContent>.Success(204) : Response<NoContent>.Fail("Discount not found", 404);
         }

@@ -11,14 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 AuthorizationPolicy requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 builder.Services.AddControllers(opt =>
 {
+    // All controllers are protected
     opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
 });
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
-
-
 builder.Services.AddScoped<IDiscountService, DiscountService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
