@@ -9,12 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{E2A7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCourse.Services.Catalog", "Services\Catalog\FreeCourse.Services.Catalog\FreeCourse.Services.Catalog.csproj", "{214E0E39-EC15-46E2-99E8-CCC71A9AA854}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7BCC2569-9D36-47C6-B247-910429468AF0}"
-	ProjectSection(SolutionItems) = preProject
-		IdentityServerProcessSteps.txt = IdentityServerProcessSteps.txt
-		Ports.txt = Ports.txt
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{F7AD031F-2737-4969-9185-D7234BB63782}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCourse.Shared", "Shared\FreeCourse.Shared\FreeCourse.Shared.csproj", "{7C5D657B-B5C6-4526-9982-69622C80EB58}"
@@ -33,7 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCourse.Services.Basket"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount", "Discount", "{D2445C1D-E6DC-4344-899F-0B4601136CA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Discount", "Services\Discount\FreeCourse.Services.Discount\FreeCourse.Services.Discount.csproj", "{5ECF97E6-DFD4-44CD-9EE2-D5899FFAA67F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCourse.Services.Discount", "Services\Discount\FreeCourse.Services.Discount\FreeCourse.Services.Discount.csproj", "{5ECF97E6-DFD4-44CD-9EE2-D5899FFAA67F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution.Reports", "Solution.Reports", "{0EAA696A-5E75-481C-B453-AF76FB138080}"
+	ProjectSection(SolutionItems) = preProject
+		Solution.Reports\IdentityServerProcessSteps.txt = Solution.Reports\IdentityServerProcessSteps.txt
+		Solution.Reports\Ports.txt = Solution.Reports\Ports.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
