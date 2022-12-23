@@ -11,7 +11,11 @@ namespace FreeCourse.Services.Order.Domain.OrderAggregate
 
         // Shallow Property
         // EF Core database de OrderId diye bir kolon bulunduracaktir fakat burada property olarak tanimlamamiz gerekmez.
-        
+
+        public OrderItem()
+        {
+
+        }
         public OrderItem(string? productId, string? productName, string? pictureUrl, decimal price)
         {
             ProductId = productId;
