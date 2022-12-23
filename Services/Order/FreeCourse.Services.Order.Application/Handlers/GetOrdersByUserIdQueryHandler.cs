@@ -10,15 +10,15 @@ namespace FreeCourse.Services.Order.Application.Handlers
 {
     public class GetOrdersByUserIdQueryHandler : IRequestHandler<GetOrdersByUserIdQuery, Response<List<OrderDto>>>
     {
-        private readonly OrderDbContext _orderDbContext;
+        private readonly OrderDbContext _dbContext;
         public GetOrdersByUserIdQueryHandler(OrderDbContext orderDbContext)
         {
-            _orderDbContext = orderDbContext;
+            _dbContext = orderDbContext;
         }
 
         public async Task<Response<List<OrderDto>>> Handle(GetOrdersByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var orders = await _orderDbContext.Orders
+            var orders = await _dbContext.Orders
                 .Include(o => o.OrderItems)
                 .Where(o => o.BuyerId == request.UserId)
                 .ToListAsync();
