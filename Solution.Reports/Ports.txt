@@ -6,3 +6,4 @@
 	-> FreeCource.Services.Basket => 5013
 	-> FreeCource.Services.Discount => 5014
 	-> FreeCource.Services.Order => 5015
+	-> FreeCource.Services.FakePayment => 5016
