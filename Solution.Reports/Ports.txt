@@ -7,3 +7,5 @@
 	-> FreeCource.Services.Discount => 5014
 	-> FreeCource.Services.Order => 5015
 	-> FreeCource.Services.FakePayment => 5016
+
+- FreeCourse.Gateway => 5000

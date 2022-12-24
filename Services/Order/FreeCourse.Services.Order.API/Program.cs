@@ -6,10 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 AuthorizationPolicy requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 builder.Services.AddControllers(opt =>
@@ -20,10 +18,8 @@ builder.Services.AddControllers(opt =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
-//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(typeof(FreeCourse.Services.Order.Application.Handlers.CreateOrderCommandHandler).Assembly);
 builder.Services.AddMediatR(typeof(FreeCourse.Services.Order.Application.Handlers.GetOrdersByUserIdQueryHandler).Assembly);
-
 
 builder.Services.AddDbContext<OrderDbContext>(opt =>
 {
