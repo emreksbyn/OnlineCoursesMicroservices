@@ -9,3 +9,5 @@
 	-> FreeCource.Services.FakePayment => 5016
 
 - FreeCourse.Gateway => 5000
+
+- FreeCourse.Web => 5010
