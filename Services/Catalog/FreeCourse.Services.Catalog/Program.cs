@@ -1,3 +1,4 @@
+using FreeCourse.Services.Catalog.Dtos.Category;
 using FreeCourse.Services.Catalog.Services;
 using FreeCourse.Services.Catalog.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -5,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddControllers(opt =>
 {
@@ -37,6 +37,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    var categoryService = serviceProvider.GetRequiredService<ICategoryService>();
+
+    if (!categoryService.GetAllAsync().Result.Data.Any())
+    {
+        categoryService.CreateAsync(new CategoryCreateDto { Name = "Asp.Net Core API Kursu" }).Wait();
+        categoryService.CreateAsync(new CategoryCreateDto { Name = "Asp.Net Core MVC Kursu" }).Wait();
+    }
+}
+
 
 if (app.Environment.IsDevelopment())
 {
