@@ -1,4 +1,4 @@
-﻿using FreeCourse.Web.Models;
+﻿using FreeCourse.Web.Models.IdentityServiceModels;
 using IdentityModel.Client;
 using Shared.FreeCourse.Shared.Dtos;
 
