@@ -14,8 +14,8 @@ namespace FreeCourse.Services.Discount.Services
         public DiscountService(IConfiguration configuration)
         {
             _configuration = configuration;
-            //_dbConnection = new NpgsqlConnection(_configuration.GetConnectionString("PostgreSql"));
-            _dbConnection = new SqlConnection(_configuration.GetConnectionString("MsSql"));
+            _dbConnection = new NpgsqlConnection(_configuration.GetConnectionString("PostgreSql"));
+            //_dbConnection = new SqlConnection(_configuration.GetConnectionString("MsSql"));
         }
         public async Task<Response<List<Models.Discount>>> GetAll()
         {

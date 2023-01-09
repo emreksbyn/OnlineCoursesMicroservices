@@ -15,9 +15,12 @@ namespace FreeCourse.Web.Services
         #endregion
 
         #region Course
-        public Task<List<CourseViewModel>> GetAllCoursesAsync()
+        public async Task<List<CourseViewModel>> GetAllCoursesAsync()
         {
+            // localhost:5000/services/catalog/course
+            //var response = await _httpClient.GetAsync("course");
             throw new NotImplementedException();
+
         }
 
         public Task<CourseViewModel> GetByCourseIdAsync(string courseId)
