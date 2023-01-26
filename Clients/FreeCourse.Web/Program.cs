@@ -1,3 +1,4 @@
+using FreeCourse.Shared.Services;
 using FreeCourse.Web.Handler;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services;
@@ -30,6 +31,8 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 ).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
 
 // Servislerde jwt olarak ekliyorudk :
