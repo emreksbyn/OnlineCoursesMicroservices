@@ -1,4 +1,5 @@
-﻿using FreeCourse.Web.Models;
+﻿using FreeCourse.Web.Helpers;
+using FreeCourse.Web.Models;
 using FreeCourse.Web.Models.CatalogServiceModels;
 using FreeCourse.Web.Services.Interfaces;
 using Shared.FreeCourse.Shared.Dtos;
@@ -10,10 +11,12 @@ namespace FreeCourse.Web.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IPhotoStockService _photoStockService;
-        public CatalogService(HttpClient httpClient, IPhotoStockService photoStockService)
+        private readonly PhotoHelper _photoHelper;
+        public CatalogService(HttpClient httpClient, IPhotoStockService photoStockService, PhotoHelper photoHelper)
         {
             _httpClient = httpClient;
             _photoStockService = photoStockService;
+            _photoHelper = photoHelper;
         }
 
         #region Course
@@ -26,6 +29,12 @@ namespace FreeCourse.Web.Services
                 return null;
             }
             Response<List<CourseViewModel>> responseData = await response.Content.ReadFromJsonAsync<Response<List<CourseViewModel>>>();
+            
+            responseData.Data.ForEach(x =>
+            {
+                x.Picture = _photoHelper.GetPhotoStockUrl(x.Picture);
+            });
+            
             return responseData.Data;
         }
 
@@ -49,7 +58,14 @@ namespace FreeCourse.Web.Services
             {
                 return null;
             }
+            
             Response<List<CourseViewModel>> responseData = await response.Content.ReadFromJsonAsync<Response<List<CourseViewModel>>>();
+
+            responseData.Data.ForEach(x =>
+            {
+                x.Picture = _photoHelper.GetPhotoStockUrl(x.Picture);
+            });
+
             return responseData.Data;
         }
 
