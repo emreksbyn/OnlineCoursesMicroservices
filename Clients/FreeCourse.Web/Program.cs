@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
-
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
+// IClientAccessTokenCache icin
+builder.Services.AddAccessTokenManagement();
 
 ServiceApiSettings serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
 
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
 
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
-
 builder.Services.AddHttpClient<ICatalogService, CatalogService>(opt =>
 {
     opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");
-});
-
+}
+).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {
     opt.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
@@ -31,9 +32,7 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 ).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
 builder.Services.AddHttpContextAccessor();
-
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
-
 
 // Servislerde jwt olarak ekliyorudk :
 // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer()

@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace FreeCourse.Web.Exceptions
+﻿namespace FreeCourse.Web.Exceptions
 {
     public class UnAuthorizeException : Exception
     {
