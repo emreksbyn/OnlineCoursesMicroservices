@@ -29,12 +29,12 @@ namespace FreeCourse.Web.Services
                 return null;
             }
             Response<List<CourseViewModel>> responseData = await response.Content.ReadFromJsonAsync<Response<List<CourseViewModel>>>();
-            
+
             responseData.Data.ForEach(x =>
             {
                 x.Picture = _photoHelper.GetPhotoStockUrl(x.Picture);
             });
-            
+
             return responseData.Data;
         }
 
@@ -58,7 +58,7 @@ namespace FreeCourse.Web.Services
             {
                 return null;
             }
-            
+
             Response<List<CourseViewModel>> responseData = await response.Content.ReadFromJsonAsync<Response<List<CourseViewModel>>>();
 
             responseData.Data.ForEach(x =>
@@ -81,6 +81,14 @@ namespace FreeCourse.Web.Services
 
         public async Task<bool> UpdateCourseAsync(CourseUpdateInput courseUpdateInput)
         {
+            var resultPhoto = await _photoStockService.UploadPhoto(courseUpdateInput.PhotoFormFile);
+
+            if (resultPhoto != null)
+            {
+                await _photoStockService.DeletePhoto(courseUpdateInput.Picture);
+                courseUpdateInput.Picture = resultPhoto.Url;
+            }
+
             var response = await _httpClient.PutAsJsonAsync<CourseUpdateInput>("courses", courseUpdateInput);
             return response.IsSuccessStatusCode;
         }
