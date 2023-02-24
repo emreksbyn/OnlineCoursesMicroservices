@@ -1,4 +1,6 @@
 ﻿using FreeCourse.Web.Models;
+using FreeCourse.Web.Models.CatalogServiceModels;
+using FreeCourse.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,20 +9,23 @@ namespace FreeCourse.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ICatalogService _catalogService;
+        public HomeController(ILogger<HomeController> logger, ICatalogService catalogService)
         {
             _logger = logger;
+            _catalogService = catalogService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<CourseViewModel> courseViewModels = await _catalogService.GetAllCoursesAsync();
+            return View(courseViewModels);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Detail(string id)
         {
-            return View();
+            CourseViewModel courseViewModel = await _catalogService.GetByCourseIdAsync(id);
+            return View(courseViewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
