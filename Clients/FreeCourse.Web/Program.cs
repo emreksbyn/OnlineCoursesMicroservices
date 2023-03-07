@@ -1,9 +1,8 @@
 using FreeCourse.Shared.Services;
+using FreeCourse.Web.Extensions;
 using FreeCourse.Web.Handler;
 using FreeCourse.Web.Helpers;
 using FreeCourse.Web.Models;
-using FreeCourse.Web.Services;
-using FreeCourse.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,32 +14,10 @@ builder.Services.AddAccessTokenManagement();
 
 builder.Services.AddSingleton<PhotoHelper>();
 
-ServiceApiSettings serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+builder.Services.AddHttpClientServices(builder.Configuration);
 
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 builder.Services.AddScoped<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
-builder.Services.AddHttpClient<IIdentityService, IdentityService>();
-
-builder.Services.AddHttpClient<ICatalogService, CatalogService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");
-}
-).AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IPhotoStockService, PhotoStockService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.PhotoStock.Path}");
-}
-).AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IUserService, UserService>(opt =>
-{
-    opt.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
-}
-// UserService icinde bir client kullanildiginda git ResourceOwnerPasswordTokenHandler' dan JWT al ve header' ina ekle demis oluyoruz.
-).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
