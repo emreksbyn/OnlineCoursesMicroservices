@@ -6,7 +6,7 @@
         public string? CourseName { get; set; }
         public int Quantity { get; set; } = 1;
         public decimal Price { get; set; }
-        private decimal? DiscountAppliedPrice { get; set; }
+        private decimal? DiscountAppliedPrice;
         public void AppliedDiscount(decimal discountPrice)
         {
             DiscountAppliedPrice = discountPrice;
